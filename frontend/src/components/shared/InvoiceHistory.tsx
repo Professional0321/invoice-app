@@ -11,7 +11,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
 import { Stack, Typography } from '@mui/material';
-import { InvoiceData } from '../pages';
+import { InvoiceType } from '../pages';
 import { InvoiceItem } from './InvoiceItem';
 import { PaymentStatusItem } from './PaymentStatusItem';
 import { formatPrice } from '@/utils/formatPrice';
@@ -39,7 +39,7 @@ const StyledTable = styled(Table)`
 `;
 
 interface Props {
-  invoices: InvoiceData[];
+  invoices: InvoiceType[];
 }
 
 export const InvoiceHistory: React.FC<Props> = ({ invoices }) => {
@@ -66,8 +66,8 @@ export const InvoiceHistory: React.FC<Props> = ({ invoices }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {invoices.map((row) => (
-              <TableRow key={row.accountId}>
+            {invoices.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell padding='none'>
                   <InvoiceItem item={row.invoiceNumber} />
                 </TableCell>
@@ -90,10 +90,9 @@ export const InvoiceHistory: React.FC<Props> = ({ invoices }) => {
                   <PaymentStatusItem
                     paymentStatus={row.paymentStatus}
                     invoiceDate={
-                      row.paymentStatus === 'Due'
+                      row.paymentStatus === 'Due' ||
+                      row.paymentStatus === 'Past Due'
                         ? row.dueDate
-                        : row.paymentStatus === 'Past Due'
-                        ? row.invoiceDate
                         : ''
                     }
                   />

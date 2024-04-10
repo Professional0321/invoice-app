@@ -2,6 +2,9 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 
 import { Stack, Typography } from '@mui/material';
+import { InvoiceType } from '../pages';
+import { calculateSummary } from '@/utils/calculateSummary';
+import { formatPrice } from '@/utils/formatPrice';
 
 const Title = styled(Typography)({
   fontSize: '18px',
@@ -38,7 +41,14 @@ const Price = styled(Typography)({
   textAlign: 'center',
 });
 
-export const AccountSummary = () => {
+interface Props {
+  invoices: InvoiceType[];
+}
+
+export const AccountSummary: React.FC<Props> = ({ invoices }) => {
+  const { includedSavings, totalAmountDue, oldestDueDate } =
+    calculateSummary(invoices);
+
   return (
     <Stack
       direction='column'
@@ -62,7 +72,7 @@ export const AccountSummary = () => {
           alignItems='center'
         >
           <AmountTitle>Included Savings</AmountTitle>
-          <Price>$2149.34</Price>
+          <Price>{formatPrice(includedSavings)}</Price>
         </Stack>
         <Stack
           direction='column'
@@ -72,7 +82,7 @@ export const AccountSummary = () => {
           alignItems='center'
         >
           <AmountTitle>Total Amount Due</AmountTitle>
-          <Price>$2149.34</Price>
+          <Price>{formatPrice(totalAmountDue)}</Price>
         </Stack>
         <Stack
           direction='column'
@@ -82,7 +92,7 @@ export const AccountSummary = () => {
           alignItems='center'
         >
           <PastDueTitle>Past Due</PastDueTitle>
-          <Price>$2149.34</Price>
+          <Price>{oldestDueDate}</Price>
         </Stack>
       </SummaryContainer>
     </Stack>

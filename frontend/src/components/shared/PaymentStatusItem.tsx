@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useCallback } from 'react';
+import React from 'react';
 import {
   ListItemButton,
   Typography,
@@ -6,7 +6,6 @@ import {
   typographyClasses,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { InvoiceData } from '../pages';
 import { formatDate } from '@/utils/formatDate';
 
 const StyledListItemButton = styled(ListItemButton)({

@@ -12,7 +12,7 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#F4FBFF',
 });
 
-export interface InvoiceData {
+export interface InvoiceType {
   accountId: string;
   amountDue: number;
   dueDate: string;
@@ -25,14 +25,14 @@ export interface InvoiceData {
 }
 
 interface Props {
-  invoices: InvoiceData[];
+  invoices: InvoiceType[];
 }
 
 export const InvoicePage: React.FC<Props> = ({ invoices }) => {
   return (
     <StyledContainer>
       <Stack useFlexGap spacing={7}>
-        <AccountSummary />
+        <AccountSummary invoices={invoices} />
         <InvoiceHistory invoices={invoices} />
       </Stack>
     </StyledContainer>
