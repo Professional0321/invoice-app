@@ -5,8 +5,6 @@ import {
   TableCell,
   TableBody,
   TableContainer,
-  tableRowClasses,
-  tableCellClasses,
   TableHead,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -16,6 +14,8 @@ import { Stack, Typography } from '@mui/material';
 import { InvoiceData } from '../pages';
 import { InvoiceItem } from './InvoiceItem';
 import { PaymentStatusItem } from './PaymentStatusItem';
+import { formatPrice } from '@/utils/formatPrice';
+import { formatDate } from '@/utils/formatDate';
 
 const Title = styled(Typography)({
   fontSize: '18px',
@@ -75,16 +75,16 @@ export const InvoiceHistory: React.FC<Props> = ({ invoices }) => {
                   <InvoiceItem item={row.projectName} />
                 </TableCell>
                 <TableCell padding='none'>
-                  <InvoiceItem item={row.invoiceDate} />
+                  <InvoiceItem item={formatDate(row.invoiceDate)} />
                 </TableCell>
                 <TableCell padding='none'>
-                  <InvoiceItem item={`$${row.savings}`} />
+                  <InvoiceItem item={formatPrice(row.savings)} />
                 </TableCell>
                 <TableCell padding='none'>
-                  <InvoiceItem item={`$${row.total}`} />
+                  <InvoiceItem item={formatPrice(row.total)} />
                 </TableCell>
                 <TableCell padding='none'>
-                  <InvoiceItem item={`$${row.amountDue}`} />
+                  <InvoiceItem item={formatPrice(row.amountDue)} />
                 </TableCell>
                 <TableCell padding='none'>
                   <PaymentStatusItem
