@@ -20,19 +20,15 @@ const SummaryContainer = styled(Stack)({
   border: '1px solid #bfbfc3',
 });
 
-const AmountTitle = styled(Typography)({
+const StyledTypography = styled(Typography)<{ title: string }>(({ title }) => ({
   fontSize: '18px',
-  color: '#004b9b',
-  fontWeight: '400',
-  textAlign: 'center',
-});
-
-const PastDueTitle = styled(Typography)({
-  fontSize: '18px',
-  color: '#f04b2d',
+  color:
+    title === 'Included Savings' || title === 'Total Amount Due'
+      ? '#004b9b'
+      : '#f04b2d',
   fontWeight: '500',
   textAlign: 'center',
-});
+}));
 
 const Price = styled(Typography)({
   fontSize: '24px',
@@ -71,7 +67,9 @@ export const AccountSummary: React.FC<Props> = ({ invoices }) => {
           justifyContent='center'
           alignItems='center'
         >
-          <AmountTitle>Included Savings</AmountTitle>
+          <StyledTypography title='Included Savings'>
+            Included Savings
+          </StyledTypography>
           <Price>{formatPrice(includedSavings)}</Price>
         </Stack>
         <Stack
@@ -81,7 +79,9 @@ export const AccountSummary: React.FC<Props> = ({ invoices }) => {
           justifyContent='center'
           alignItems='center'
         >
-          <AmountTitle>Total Amount Due</AmountTitle>
+          <StyledTypography title='Total Amount Due'>
+            Total Amount Due
+          </StyledTypography>
           <Price>{formatPrice(totalAmountDue)}</Price>
         </Stack>
         <Stack
@@ -91,7 +91,7 @@ export const AccountSummary: React.FC<Props> = ({ invoices }) => {
           justifyContent='center'
           alignItems='center'
         >
-          <PastDueTitle>Past Due</PastDueTitle>
+          <StyledTypography title='Past Due'>Past Due</StyledTypography>
           <Price>{oldestDueDate}</Price>
         </Stack>
       </SummaryContainer>
