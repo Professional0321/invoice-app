@@ -2,9 +2,9 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 
 import { Stack, Typography } from '@mui/material';
-import { InvoiceType } from '../pages';
 import { calculateSummary } from '@/utils/calculateSummary';
 import { formatPrice } from '@/utils/formatPrice';
+import { InvoiceType } from '@/types/type';
 
 const Title = styled(Typography)({
   fontSize: '24px',
@@ -60,7 +60,7 @@ export const AccountSummary: React.FC<Props> = ({ invoices }) => {
       <Title>Account summary</Title>
       <SummaryContainer
         useFlexGap
-        direction='row'
+        direction={{ xs: 'column', sm: 'row' }}
         justifyContent='space-between'
         alignItems='center'
       >

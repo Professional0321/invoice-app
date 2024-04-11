@@ -1,4 +1,4 @@
-import { InvoiceType } from '@/components/pages';
+import { InvoiceType } from '@/types/type';
 
 interface Summary {
   includedSavings: number;
@@ -20,23 +20,26 @@ export const calculateSummary = (invoices: InvoiceType[]): Summary => {
     0
   );
 
-  const oldestOutstandingInvoice = outstandingInvoices.reduce(
-    (oldest, current) => {
-      const oldestDueDate = new Date(oldest.dueDate);
-      const currentDueDate = new Date(current.dueDate);
-      return oldestDueDate < currentDueDate ? oldest : current;
-    }
-  );
+  let formattedDueDate = '';
+  if (outstandingInvoices?.length > 0) {
+    const oldestOutstandingInvoice = outstandingInvoices?.reduce(
+      (oldest, current) => {
+        const oldestDueDate = new Date(oldest.dueDate);
+        const currentDueDate = new Date(current.dueDate);
+        return oldestDueDate < currentDueDate ? oldest : current;
+      },
+      outstandingInvoices?.[0]
+    );
 
-  const { dueDate } = oldestOutstandingInvoice;
+    const { dueDate } = oldestOutstandingInvoice;
 
-  const formattedDueDate = new Date(dueDate).toLocaleDateString('en-US', {
-    timeZone: 'UTC',
-    month: '2-digit',
-    day: '2-digit',
-    year: '2-digit',
-  });
-
+    formattedDueDate = new Date(dueDate).toLocaleDateString('en-US', {
+      timeZone: 'UTC',
+      month: '2-digit',
+      day: '2-digit',
+      year: '2-digit',
+    });
+  }
   return {
     includedSavings,
     totalAmountDue,

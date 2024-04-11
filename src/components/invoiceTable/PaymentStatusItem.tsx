@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { formatDate } from '@/utils/formatDate';
+import { PaymentStatus } from '@/types/type';
 
 const StyledListItemButton = styled(ListItemButton)({
   padding: '1rem 1.5rem',
@@ -22,33 +23,18 @@ const StyledListItemButton = styled(ListItemButton)({
   },
 });
 
-const DueFont = styled(Typography)({
-  fontSize: '14px',
-  fontWeight: '400',
-  backgroundColor: '#4962FA',
-  borderRadius: '10px',
-  padding: '1px 5px',
-  color: '#fff',
-});
-
-const PastDueFont = styled(Typography)({
-  fontSize: '14px',
-  fontWeight: '400',
-  backgroundColor: '#DB502F',
-  borderRadius: '10px',
-  padding: '1px 5px',
-  color: '#fff',
-});
-
-const PaidFont = styled(Typography)({
-  fontSize: '14px',
-  fontWeight: '400',
-  backgroundColor: '#fff',
-  borderRadius: '10px',
-  padding: '1px 5px',
-  color: '#61936E',
-  border: '1px solid #61936E',
-});
+const StyledTypography = styled(Typography)<{ status: PaymentStatus }>(
+  ({ status }) => ({
+    fontSize: '14px',
+    fontWeight: '400',
+    backgroundColor:
+      status === 'Due' ? '#4962FA' : status === 'Past Due' ? '#DB502F' : '#fff',
+    borderRadius: '10px',
+    padding: '1px 5px',
+    color: status === 'Due' || status === 'Past Due' ? '#fff' : '#61936E',
+    border: status === 'Paid' ? '1px solid #61936E' : 'none',
+  })
+);
 
 interface Props {
   paymentStatus: string;
@@ -67,14 +53,12 @@ export const PaymentStatusItem: React.FC<Props> = ({
         spacing={4}
         justifyContent='space-between'
         alignItems='left'
+        width={'100%'}
       >
-        {paymentStatus === 'Due' ? (
-          <DueFont>{paymentStatus}</DueFont>
-        ) : paymentStatus === 'Past Due' ? (
-          <PastDueFont>{paymentStatus}</PastDueFont>
-        ) : (
-          <PaidFont>{paymentStatus}</PaidFont>
-        )}
+        <StyledTypography status={paymentStatus}>
+          {paymentStatus}
+        </StyledTypography>
+
         {invoiceDate && (
           <Typography variant='h5' fontWeight='400'>
             {formatDate(invoiceDate)}
