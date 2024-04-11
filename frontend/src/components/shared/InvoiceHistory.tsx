@@ -18,15 +18,13 @@ import { formatPrice } from '@/utils/formatPrice';
 import { formatDate } from '@/utils/formatDate';
 
 const Title = styled(Typography)({
-  fontSize: '18px',
+  fontSize: '24px',
   color: '#78787d',
   fontWeight: '400',
   textAlign: 'left',
 });
 
 const StyledTable = styled(Table)`
-  border: '2px solid #B9E2FD';
-
   & .MuiTableHead-root th {
     background-color: #d3f1fe;
     font-size: 14px;
@@ -56,7 +54,7 @@ export const InvoiceHistory: React.FC<Props> = ({ invoices }) => {
         <StyledTable>
           <TableHead>
             <TableRow>
-              <TableCell>Invoice#</TableCell>
+              <TableCell>Invoice #</TableCell>
               <TableCell>Project</TableCell>
               <TableCell>Invoice Date</TableCell>
               <TableCell>Savings</TableCell>

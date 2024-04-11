@@ -7,7 +7,7 @@ import { calculateSummary } from '@/utils/calculateSummary';
 import { formatPrice } from '@/utils/formatPrice';
 
 const Title = styled(Typography)({
-  fontSize: '18px',
+  fontSize: '24px',
   color: '#78787d',
   fontWeight: '400',
   textAlign: 'left',
@@ -21,14 +21,14 @@ const SummaryContainer = styled(Stack)({
 });
 
 const AmountTitle = styled(Typography)({
-  fontSize: '14px',
+  fontSize: '18px',
   color: '#004b9b',
   fontWeight: '400',
   textAlign: 'center',
 });
 
 const PastDueTitle = styled(Typography)({
-  fontSize: '14px',
+  fontSize: '18px',
   color: '#f04b2d',
   fontWeight: '500',
   textAlign: 'center',

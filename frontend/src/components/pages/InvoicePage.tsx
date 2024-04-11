@@ -6,11 +6,21 @@ import { styled } from '@mui/material/styles';
 import { AccountSummary } from '@/components/shared';
 import { InvoiceHistory } from '@/components/shared';
 
-const StyledContainer = styled(Container)({
-  padding: '2.5rem 3.75rem',
-  maxWidth: '78rem',
-  backgroundColor: '#F4FBFF',
-});
+const StyledContainer = styled(Container)(
+  {
+    backgroundColor: '#F4FBFF',
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ({ theme }) => ({
+    [`@media (min-width: ${theme.breakpoints.values.lg}px)`]: {
+      maxWidth: 'none',
+    },
+  })
+);
 
 export interface InvoiceType {
   accountId: string;

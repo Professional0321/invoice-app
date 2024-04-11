@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ListItemButton,
+  Stack,
   Typography,
   listItemTextClasses,
   typographyClasses,
@@ -11,7 +12,6 @@ import { formatDate } from '@/utils/formatDate';
 const StyledListItemButton = styled(ListItemButton)({
   padding: '1rem 1.5rem',
   backgroundColor: '#fff',
-  justifyContent: 'space-between',
 
   [`& .${listItemTextClasses.root}`]: {
     margin: 0,
@@ -61,18 +61,26 @@ export const PaymentStatusItem: React.FC<Props> = ({
 }) => {
   return (
     <StyledListItemButton disableRipple>
-      {paymentStatus === 'Due' ? (
-        <DueFont>{paymentStatus}</DueFont>
-      ) : paymentStatus === 'Past Due' ? (
-        <PastDueFont>{paymentStatus}</PastDueFont>
-      ) : (
-        <PaidFont>{paymentStatus}</PaidFont>
-      )}
-      {invoiceDate && (
-        <Typography variant='h5' fontWeight='400'>
-          {formatDate(invoiceDate)}
-        </Typography>
-      )}
+      <Stack
+        direction='row'
+        useFlexGap
+        spacing={4}
+        justifyContent='space-between'
+        alignItems='left'
+      >
+        {paymentStatus === 'Due' ? (
+          <DueFont>{paymentStatus}</DueFont>
+        ) : paymentStatus === 'Past Due' ? (
+          <PastDueFont>{paymentStatus}</PastDueFont>
+        ) : (
+          <PaidFont>{paymentStatus}</PaidFont>
+        )}
+        {invoiceDate && (
+          <Typography variant='h5' fontWeight='400'>
+            {formatDate(invoiceDate)}
+          </Typography>
+        )}
+      </Stack>
     </StyledListItemButton>
   );
 };
