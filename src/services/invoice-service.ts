@@ -6,12 +6,8 @@ class InvoiceService {
     const response = await apiServer.get('invoices/all');
     return response.data;
   }
-  async fetchUsers(): Promise<AccountsType[]> {
+  async fetchAccounts(): Promise<AccountsType[]> {
     const response = await apiServer.get('accounts/all');
-    return response.data;
-  }
-  async fetchUser(): Promise<UserType> {
-    const response = await apiServer.get('users/me');
     return response.data;
   }
 }

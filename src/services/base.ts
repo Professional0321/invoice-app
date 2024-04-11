@@ -51,3 +51,7 @@ export const handleErrorCode = (error: unknown) => {
 
   return error.response.data.statusCode;
 };
+
+export const setToken = (token: string) => {
+  apiServer.defaults.headers.Authorization = `Bearer ${token}`;
+};
